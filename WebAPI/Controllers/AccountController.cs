@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
+    [Route("api/[controller]")]
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
@@ -16,12 +17,10 @@ namespace WebAPI.Controllers
             _accountService = accountService;
             _mailService = mailService;
         }
-        public IActionResult Index()
-        {
-            return Ok();
-        }
+
         
         [HttpPost("createaccountbyfile")]
+        [Consumes("multipart/form-data")]
         public async  Task<IActionResult> CreateAccountByFile(IFormFile file)
         {
             var result = await _accountService.CreateAccountByFile(file);
