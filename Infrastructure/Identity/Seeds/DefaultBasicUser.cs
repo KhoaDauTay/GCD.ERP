@@ -45,6 +45,7 @@ namespace Infrastructure.Seeds
                 NormalizedUserName = "ADMIN",
                 FullName = "Admin FullName",
                 Email = "admin@gmail.com",
+                NormalizedEmail = "admin@gmail.com",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 PasswordHash = hasher.HashPassword(null, "Admin@123"),
