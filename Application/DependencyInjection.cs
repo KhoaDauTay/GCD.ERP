@@ -15,8 +15,8 @@ namespace Application
         
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
+            services.Configure<JWT>(configuration.GetSection("JWT"));
             services.AddScoped<IJwTservice, JwTservice>();
-            
         }
     }
 }
