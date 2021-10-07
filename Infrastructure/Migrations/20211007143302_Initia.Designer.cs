@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Infrastructure.@new
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211005055216_Initial1")]
-    partial class Initial1
+    [Migration("20211007143302_Initia")]
+    partial class Initia
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,13 @@ namespace Infrastructure.@new
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -91,32 +97,33 @@ namespace Infrastructure.@new
                     b.HasData(
                         new
                         {
-                            Id = "fd76e6e4-2847-45e6-84c6-6fa045e7c75e",
+                            Id = "3f4409bb-0785-40fd-9933-bf5da659a206",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3146c23c-fdf0-4fd0-b3b0-94f975fd3038",
+                            ConcurrencyStamp = "3d29cab0-beba-4112-a5c5-8f7632a43489",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Admin FullName",
                             LockoutEnabled = false,
+                            NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAELon98XZfajgjcobtV/3ZemITtO8gtOlWvwcMWCmgFG1HbyLb5GNbt806HjNhO4elA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPtUnclRHXt2DhJ+e0YtlNlZV7/kwYD1Tu2jGuhvAE96Fj2aGEALPJ9a3lfnRTZInA==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "c0df6a11-aa99-40f6-ba5d-be53760590b5",
+                            SecurityStamp = "f62809da-f46c-46c8-9ac9-dc9e04083360",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "b8cfb351-e948-45c3-9c7d-367845b8ee8c",
+                            Id = "65df5890-e089-4725-a4ae-387f5150b683",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3b6eed7f-f9e4-45af-9b89-8ece80fcc046",
+                            ConcurrencyStamp = "0e90200a-ab6f-4815-99e8-a2d652d65a24",
                             Email = "basic@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Basic FullName",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEHnwT5sh3SsorysM62TyH2W54lURH16Hha/PuKiNtDoaUAPSf3dcEBZjQdFviuyZrA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMss4DhcryfvS2i8abpV6O025Jw5Tg48VLsLN49jJ6JLL9/Xa5prqvNYYH48IeXqMA==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "07660776-5f74-49c3-904b-580f6c20a25c",
+                            SecurityStamp = "5ced830a-cc3a-4c2d-97f5-e5b1c25aa861",
                             TwoFactorEnabled = false,
                             UserName = "basic"
                         });
@@ -151,22 +158,22 @@ namespace Infrastructure.@new
                     b.HasData(
                         new
                         {
-                            Id = "6b197e5f-0d23-4865-952a-435b3e32ebea",
-                            ConcurrencyStamp = "3fa159f6-4484-4413-b4e8-fcef27586c9e",
+                            Id = "da435104-5058-46a2-aba8-d867ec560839",
+                            ConcurrencyStamp = "693c6950-1271-4f69-9100-7932075630f1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b263b7c3-c01a-466f-a54e-72e85d2a8763",
-                            ConcurrencyStamp = "3a39630c-401f-4d89-968b-33ffad558984",
+                            Id = "e3fea542-fda1-49bb-ae58-73272853ffa1",
+                            ConcurrencyStamp = "980c4b3b-3b46-410e-9f40-36d1b6cd3526",
                             Name = "Basic",
                             NormalizedName = "BASIC"
                         },
                         new
                         {
-                            Id = "bbcb0c0b-cee8-4687-84e4-e61e9d00520b",
-                            ConcurrencyStamp = "2f94f50a-8f58-4abd-9117-3ab0c0f10dd8",
+                            Id = "bc544acd-33f6-4f90-848f-6b6f76b5fb01",
+                            ConcurrencyStamp = "a8cb9eb8-7ac9-4c4a-bfba-39fd9963ce80",
                             Name = "Default",
                             NormalizedName = "DEFAULT"
                         });
@@ -259,13 +266,13 @@ namespace Infrastructure.@new
                     b.HasData(
                         new
                         {
-                            UserId = "fd76e6e4-2847-45e6-84c6-6fa045e7c75e",
-                            RoleId = "6b197e5f-0d23-4865-952a-435b3e32ebea"
+                            UserId = "3f4409bb-0785-40fd-9933-bf5da659a206",
+                            RoleId = "da435104-5058-46a2-aba8-d867ec560839"
                         },
                         new
                         {
-                            UserId = "b8cfb351-e948-45c3-9c7d-367845b8ee8c",
-                            RoleId = "b263b7c3-c01a-466f-a54e-72e85d2a8763"
+                            UserId = "65df5890-e089-4725-a4ae-387f5150b683",
+                            RoleId = "e3fea542-fda1-49bb-ae58-73272853ffa1"
                         });
                 });
 
@@ -286,6 +293,41 @@ namespace Infrastructure.@new
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("UserTokens");
+                });
+
+            modelBuilder.Entity("Domain.Entities.User", b =>
+                {
+                    b.OwnsMany("Domain.Entities.RefreshToken", "RefreshTokens", b1 =>
+                        {
+                            b1.Property<string>("UserId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .UseIdentityColumn();
+
+                            b1.Property<DateTime>("Created")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("Expires")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime?>("Revoked")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<string>("Token")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("UserId", "Id");
+
+                            b1.ToTable("RefreshToken");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("RefreshTokens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
