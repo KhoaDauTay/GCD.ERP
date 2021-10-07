@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces;
+
 using Domain.Settings;
 using Infrastructure;
 using Infrastructure.Context;
@@ -43,6 +44,8 @@ namespace WebAPI
             services.Configure<MailSetting>(mailSettingSection);
 
             services.AddService();
+            
+            
             // Adding Authentication  
             services.AddAuthentication(options =>  
                 {  
@@ -64,7 +67,7 @@ namespace WebAPI
                         ValidIssuer = Configuration["JWT:ValidIssuer"],  
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))  
                     };  
-                });
+                });  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
