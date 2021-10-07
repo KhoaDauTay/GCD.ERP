@@ -110,7 +110,7 @@ namespace WebAPI.Controllers
             if (!await roleManager.RoleExistsAsync(Roles.Basic.ToString()))
                 await roleManager.CreateAsync(new IdentityRole(Roles.Basic.ToString()));
 
-            if (await roleManager.RoleExistsAsync(Roles.Admin.ToString()));
+            if (await roleManager.RoleExistsAsync(Roles.Admin.ToString()))
             {
                 await userManager.AddToRoleAsync(user, Roles.Admin.ToString());
             }

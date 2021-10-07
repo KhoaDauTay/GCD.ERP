@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces;
+using Domain.Settings;
 using Infrastructure;
 using Infrastructure.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -17,6 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Service;
 
 namespace WebAPI
 {
@@ -36,6 +38,11 @@ namespace WebAPI
             services.AddInfratructure(Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebAPI", Version = "v1"}); });
+            // Add Mail Setting
+            var mailSettingSection = Configuration.GetSection("MailSetting");
+            services.Configure<MailSetting>(mailSettingSection);
+
+            services.AddService();
             // Adding Authentication  
             services.AddAuthentication(options =>  
                 {  
@@ -57,7 +64,7 @@ namespace WebAPI
                         ValidIssuer = Configuration["JWT:ValidIssuer"],  
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))  
                     };  
-                });  
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
