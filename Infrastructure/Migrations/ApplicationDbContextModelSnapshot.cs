@@ -4,16 +4,14 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Infrastructure.@new
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211005061230_Initial13")]
-    partial class Initial13
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +38,13 @@ namespace Infrastructure.@new
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -91,32 +95,33 @@ namespace Infrastructure.@new
                     b.HasData(
                         new
                         {
-                            Id = "5287b8e1-cb7d-404b-a835-4057e2e1853e",
+                            Id = "3f4409bb-0785-40fd-9933-bf5da659a206",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dbddcda3-5a65-4f83-805b-e9324c201e01",
+                            ConcurrencyStamp = "3d29cab0-beba-4112-a5c5-8f7632a43489",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Admin FullName",
                             LockoutEnabled = false,
+                            NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPWPN+19X4ZrnJjVYjU8aRdiTbXyBeWqL0X09W4Z8g7jgH6OOzqCkKJFr7pVfCd5pQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPtUnclRHXt2DhJ+e0YtlNlZV7/kwYD1Tu2jGuhvAE96Fj2aGEALPJ9a3lfnRTZInA==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "70086666-49b6-4a56-8601-e1b0eae4b5f1",
+                            SecurityStamp = "f62809da-f46c-46c8-9ac9-dc9e04083360",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = "1e651732-736d-48e3-90a2-f91daa928776",
+                            Id = "65df5890-e089-4725-a4ae-387f5150b683",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fa17396b-a277-44fa-8311-41b52eb8e187",
+                            ConcurrencyStamp = "0e90200a-ab6f-4815-99e8-a2d652d65a24",
                             Email = "basic@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Basic FullName",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAENIIdvhBEEoHIXaPLC2VVecl61+ZK7vrAg8wigd559rs3uUBFXEW9Iz3h2xDyy8vcQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMss4DhcryfvS2i8abpV6O025Jw5Tg48VLsLN49jJ6JLL9/Xa5prqvNYYH48IeXqMA==",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "2653fcc5-16d3-4ea6-a762-c56600ea61bc",
+                            SecurityStamp = "5ced830a-cc3a-4c2d-97f5-e5b1c25aa861",
                             TwoFactorEnabled = false,
                             UserName = "basic"
                         });
@@ -151,22 +156,22 @@ namespace Infrastructure.@new
                     b.HasData(
                         new
                         {
-                            Id = "8c076a28-1b56-4bc9-9a54-92cac3d98763",
-                            ConcurrencyStamp = "b13ab683-6179-4a1a-9e4a-1c667327edcd",
+                            Id = "da435104-5058-46a2-aba8-d867ec560839",
+                            ConcurrencyStamp = "693c6950-1271-4f69-9100-7932075630f1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "7ccfb274-6fbe-451a-9a5e-7a066ed533d5",
-                            ConcurrencyStamp = "2a7f562c-cad6-4a86-8c61-eaed9a2f81d2",
+                            Id = "e3fea542-fda1-49bb-ae58-73272853ffa1",
+                            ConcurrencyStamp = "980c4b3b-3b46-410e-9f40-36d1b6cd3526",
                             Name = "Basic",
                             NormalizedName = "BASIC"
                         },
                         new
                         {
-                            Id = "0c12cf25-685f-412a-84de-aa63c76880cf",
-                            ConcurrencyStamp = "96511d1c-6131-4ba3-a3dd-bd3e2c973282",
+                            Id = "bc544acd-33f6-4f90-848f-6b6f76b5fb01",
+                            ConcurrencyStamp = "a8cb9eb8-7ac9-4c4a-bfba-39fd9963ce80",
                             Name = "Default",
                             NormalizedName = "DEFAULT"
                         });
@@ -259,13 +264,13 @@ namespace Infrastructure.@new
                     b.HasData(
                         new
                         {
-                            UserId = "5287b8e1-cb7d-404b-a835-4057e2e1853e",
-                            RoleId = "8c076a28-1b56-4bc9-9a54-92cac3d98763"
+                            UserId = "3f4409bb-0785-40fd-9933-bf5da659a206",
+                            RoleId = "da435104-5058-46a2-aba8-d867ec560839"
                         },
                         new
                         {
-                            UserId = "1e651732-736d-48e3-90a2-f91daa928776",
-                            RoleId = "7ccfb274-6fbe-451a-9a5e-7a066ed533d5"
+                            UserId = "65df5890-e089-4725-a4ae-387f5150b683",
+                            RoleId = "e3fea542-fda1-49bb-ae58-73272853ffa1"
                         });
                 });
 
@@ -286,6 +291,41 @@ namespace Infrastructure.@new
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("UserTokens");
+                });
+
+            modelBuilder.Entity("Domain.Entities.User", b =>
+                {
+                    b.OwnsMany("Domain.Entities.RefreshToken", "RefreshTokens", b1 =>
+                        {
+                            b1.Property<string>("UserId")
+                                .HasColumnType("nvarchar(450)");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .UseIdentityColumn();
+
+                            b1.Property<DateTime>("Created")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime>("Expires")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<DateTime?>("Revoked")
+                                .HasColumnType("datetime2");
+
+                            b1.Property<string>("Token")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("UserId", "Id");
+
+                            b1.ToTable("RefreshToken");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("RefreshTokens");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application;
 using Application.Interfaces;
+using Application.Setting;
 using Infrastructure;
 using Infrastructure.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -22,7 +24,6 @@ namespace WebAPI
 {
     public class Startup
     {
-        public IConfiguration _config { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,31 +34,40 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<JWT>(Configuration.GetSection("JWT"));
+            services.AddApplication(Configuration);
             services.AddInfratructure(Configuration);
+
+            #region Adding Athentication
+            //Adding Athentication - JWT
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                
+                .AddJwtBearer(o =>
+                {
+                    o.RequireHttpsMetadata = false;
+                    o.SaveToken = false;
+                    o.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero,
+                        
+                        ValidIssuer = Configuration["JWT:Issuer"],
+                        ValidAudience = Configuration["JWT:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"]))
+                    };
+                });
+            #endregion
+            
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebAPI", Version = "v1"}); });
-            // Adding Authentication  
-            services.AddAuthentication(options =>  
-                {  
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;  
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;  
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;  
-                })  
-  
-                // Adding Jwt Bearer  
-                .AddJwtBearer(options =>  
-                {  
-                    options.SaveToken = true;  
-                    options.RequireHttpsMetadata = false;  
-                    options.TokenValidationParameters = new TokenValidationParameters()  
-                    {  
-                        ValidateIssuer = true,  
-                        ValidateAudience = true,  
-                        ValidAudience = Configuration["JWT:ValidAudience"],  
-                        ValidIssuer = Configuration["JWT:ValidIssuer"],  
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))  
-                    };  
-                });  
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,9 +83,9 @@ namespace WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
+           
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
