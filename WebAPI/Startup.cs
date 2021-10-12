@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Application;
 using Application.Interfaces;
 using Application.Setting;
+using Domain.Settings;
 using Infrastructure;
 using Infrastructure.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,6 +20,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Service;
 
 namespace WebAPI
 {
@@ -34,10 +36,15 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<JWT>(Configuration.GetSection("JWT"));
             services.AddApplication(Configuration);
             services.AddInfratructure(Configuration);
+            services.AddControllers();
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebAPI", Version = "v1"}); });
+            // Add Mail Setting
+            var mailSettingSection = Configuration.GetSection("MailSetting");
+            services.Configure<MailSetting>(mailSettingSection);
 
+            services.AddService();  
             #region Adding Athentication
             //Adding Athentication - JWT
             services.AddAuthentication(options =>
@@ -64,10 +71,6 @@ namespace WebAPI
                     };
                 });
             #endregion
-            
-            services.AddControllers();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebAPI", Version = "v1"}); });
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,9 +86,9 @@ namespace WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseAuthentication();
+
             app.UseAuthorization();
-           
+
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
