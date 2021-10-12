@@ -57,8 +57,22 @@ namespace Service.Account
 
                 var password = GenerateRandomPassword();
                 IdentityResult createResult = await _userManager.CreateAsync(user, password);
-                var assignRoleResult = await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
-
+                // var assignRoleResult = await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
+                
+                // Assign Role
+                if (request.Roles == null)
+                {
+                    var assignRoleResult = await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
+                }
+                else
+                {
+                    foreach (var role in request.Roles)
+                    {
+                        var assignRoleResult = await _userManager.AddToRoleAsync(user, role);
+                    }
+                }
+                
+                // Send Account
                 var sendMailRequest = new SendEmailRequest()
                 {
 
@@ -78,7 +92,7 @@ namespace Service.Account
                       </html>
                      ",
                 };
-                _mailService.SendEmail(sendMailRequest);
+               await _mailService.SendEmailAsync(sendMailRequest);
             }
             return await _context.SaveChangesAsync();
         }
@@ -129,6 +143,11 @@ namespace Service.Account
 
             requests.Remove(requests[0]);
             return requests;
+        }
+
+        public Task<int> AssignRoleAsync(string userId, string roleId)
+        {
+            throw new NotImplementedException();
         }
 
         private string GenerateRandomPassword()

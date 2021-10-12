@@ -3,6 +3,7 @@ using Application.Interfaces.IServices;
 using Microsoft.Extensions.DependencyInjection;
 using Service.Account;
 using Service.Mail;
+using Service.Role;
 
 namespace Service
 {
@@ -14,6 +15,7 @@ namespace Service
             {
                 services.AddTransient<IMailService, MailService>();
                 services.AddTransient<IAccountService, AccountService>();
+                services.AddTransient<IRoleService, RoleService>();
                 
             }
         }

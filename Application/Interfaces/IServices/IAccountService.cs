@@ -13,5 +13,7 @@ namespace Application.Interfaces.IServices
         Task<int> CreateAccountRange(List<CreateAccountRequest> requests);
         Task<int> CreateAccountByFile(IFormFile file);
         List<CreateAccountRequest> GetModelFromFile(IFormFile file);
+
+        Task<int> AssignRoleAsync(string userId, string roleId);
     }
 }
