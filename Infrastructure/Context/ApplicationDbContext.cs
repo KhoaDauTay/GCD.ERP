@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Application.Interfaces;
 using Domain.Entities;
-using Infrastructure.Seeds;
+// using Infrastructure.Seeds;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -46,7 +46,7 @@ namespace Infrastructure.Context
             {
                 entity.ToTable("UserTokens");
             });
-            DefaultBasicUser.Seed(builder);
+            // DefaultBasicUser.Seed(builder);
         }
 
         public DbSet<User> Users { get; set; }

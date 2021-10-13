@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Domain.Entities;
 using Infrastructure.Context;
+using Infrastructure.Initializer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,8 @@ namespace Infrastructure
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddScoped<IDbInitializer, DbInitializer>();
+
         }
     }
 }
