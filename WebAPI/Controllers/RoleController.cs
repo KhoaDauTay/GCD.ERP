@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Extensions;
 namespace WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
+    [ApiController]
     public class RoleController : Controller
     {
         // GET

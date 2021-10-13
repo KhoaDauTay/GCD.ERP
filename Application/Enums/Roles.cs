@@ -2,9 +2,9 @@
 {
     public enum Roles
     {
-        SuperAdmin,
+        SuperAdmin, //Admin // Head // Member
         Admin,
-        Moderator,
-        Basic
+        HeadOfDepartment,
+        Member
     }
 }

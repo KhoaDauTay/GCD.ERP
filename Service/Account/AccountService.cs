@@ -62,7 +62,7 @@ namespace Service.Account
                 // Assign Role
                 if (request.Roles == null)
                 {
-                    var assignRoleResult = await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
+                    var assignRoleResult = await _userManager.AddToRoleAsync(user, Roles.Member.ToString());
                 }
                 else
                 {
